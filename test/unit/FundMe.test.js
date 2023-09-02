@@ -36,7 +36,12 @@ const { developmentChains } = require("../../helper-hardhat-config")
                       "You need to spend more ETH!"
                   )
               })
-
+            it("Fails if you don't send 0.05 ETH", async () => {
+                await fundMe.fund({ value: sendValue })
+                let withdrawAmount = ethers.utils.parseUnits("0.05", "ether");
+                assert.isAtMost(withdrawAmount,sendValue)
+               
+            })
             //  it("Fails if you send less than , 50 * 10**18 ETH", async () => {
              //   const currentValue = await fundMe.fund({ value: sendValue })
               //  const expectedValue = 
